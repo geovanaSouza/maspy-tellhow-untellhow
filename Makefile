@@ -5,7 +5,7 @@ PYTHON ?= $(VENV)/bin/python
 # EXAMPLES: example scripts executed by `make run`
 EXAMPLES := $(sort $(wildcard examples/*.py))
 
-.PHONY: setup run run-tellhow help
+.PHONY: setup run run-tellhow run-untellhow help
 
 setup: $(PYTHON) ## Create the venv and install the project dependencies
 	uv pip install --python $(PYTHON) --reinstall-package maspy-ml -e .
@@ -21,6 +21,9 @@ run: ## Run all examples
 
 run-tellhow: ## Run the tellHow example
 	$(PYTHON) examples/tellhow.py
+
+run-untellhow: ## Run the untellHow example
+	$(PYTHON) examples/untellhow.py
 
 help: ## Show this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9_.-]+:.*?## / {printf "  %-20s %s\n", $$1, $$2}' $(MAKEFILE_LIST)

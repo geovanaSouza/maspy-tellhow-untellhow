@@ -26,6 +26,15 @@ make setup
 make run
 ```
 
+To run against the MASPY `integration` branch:
+
+```bash
+make install-integration
+make run
+```
+
+Use `make install-maspy MASPY="git+https://github.com/geovanaSouza/MASPY.git@<ref>"` to install another MASPY ref.
+
 ## Make targets
 
 | Target | Description |

@@ -4,14 +4,26 @@ VENV ?= .venv
 PYTHON ?= $(VENV)/bin/python
 # EXAMPLES: example scripts executed by `make run`
 EXAMPLES := $(sort $(wildcard examples/*.py))
+# MASPY: MASPY requirement to install. Defaults to the published package.
+#   Integration: MASPY="git+https://github.com/geovanaSouza/MASPY.git@integration"
+#   Local:       MASPY="-e ../MASPY"
+MASPY ?= maspy-ml
+MASPY_INTEGRATION ?= git+https://github.com/geovanaSouza/MASPY.git@integration
 
-.PHONY: setup run run-tellhow run-untellhow help
+.PHONY: setup install-maspy install-integration run run-tellhow run-untellhow help
 
 setup: $(PYTHON) ## Create the venv and install the project dependencies
 	uv pip install --python $(PYTHON) --reinstall-package maspy-ml -e .
 
 $(PYTHON):
 	uv venv $(VENV) --python 3.12
+
+install-maspy: $(PYTHON) ## Install/replace MASPY (default: published; override with MASPY=...)
+	uv pip install --python $(PYTHON) --reinstall-package maspy-ml $(MASPY)
+
+install-integration: ## Create/update the venv and install MASPY from the integration branch
+	$(MAKE) setup
+	$(MAKE) install-maspy MASPY="$(MASPY_INTEGRATION)"
 
 run: ## Run all examples
 	@set -e; for example in $(EXAMPLES); do \

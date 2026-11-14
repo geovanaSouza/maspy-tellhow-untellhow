@@ -14,7 +14,8 @@ class Sample(Agent):
         self.print("Final state of the receiver")
         self.send("Receiver", achieve, Goal("debug", "FINAL"))
 
-        # The hello goal still executes because the plan was not removed.
+        # With maspy-ml>=2026.11.12 the hello plan is actually removed,
+        # so the final Goal("hello") no longer has an applicable plan to run.
         self.send("Receiver", achieve, Goal("hello"))
         self.stop_cycle()
 

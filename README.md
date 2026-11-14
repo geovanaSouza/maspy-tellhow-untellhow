@@ -30,13 +30,12 @@ make setup
 make run
 ```
 
-To run against the MASPY `integration` branch:
-
-`integration` is the integration branch of the `geovanaSouza/MASPY` fork. It bundles behavior fixes that are not yet available in the published PyPI release — issues [#24](https://github.com/laca-is/MASPY/issues/24), [#25](https://github.com/laca-is/MASPY/issues/25), and [#26](https://github.com/laca-is/MASPY/issues/26).
+To run against another MASPY version (e.g. `2026.5.13` for the pre-fix behavior):
 
 ```bash
-make install-integration
-make run
+make install-maspy MASPY="maspy-ml==2026.5.13"
+make run-tellhow
+make run-untellhow
 ```
 
 Use `make install-maspy MASPY="git+https://github.com/geovanaSouza/MASPY.git@<ref>"` to install another MASPY ref.

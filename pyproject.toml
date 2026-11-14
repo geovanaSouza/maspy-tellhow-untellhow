@@ -8,5 +8,5 @@ version = "0.1.0"
 description = "Minimal reproduction of tellHow/untellHow plan-library behavior in MASPY."
 requires-python = ">=3.12"
 dependencies = [
-    "maspy-ml==2026.5.13",
+    "maspy-ml==2026.11.12",
 ]

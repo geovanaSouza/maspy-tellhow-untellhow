@@ -8,11 +8,15 @@ Minimal reproduction repository for plan-library behavior in MASPY.
 
 Sends a plan from `Sender` to `Receiver` with `tellHow`. The receiver then reports its `_plans` and `_plan_index`.
 
-The example also tries to execute the received plan on `Receiver`, but the execution does not work because the plan is present in `_plans` but is not indexed in `_plan_index`.
+The example also executes the received plan on `Receiver`. With `maspy-ml>=2026.11.12` the plan is present in both `_plans` and `_plan_index`, so the `hello` goal runs (`Hello!`).
+
+With `maspy-ml==2026.5.13` the plan was present in `_plans` but was not indexed in `_plan_index`, so the goal was never executed.
 
 ### untellHow
 
-Sends an `untellHow` message for the `hello` plan and reports `_plans` and `_plan_index` before and after. The plan is added again instead of removed, `_plan_index` remains unchanged, and `Receiver` still executes the `hello` goal.
+Sends an `untellHow` message for the `hello` plan and reports `_plans` and `_plan_index` before and after. With `maspy-ml>=2026.11.12` the plan is removed from both the plan library and the index, so the final `Goal("hello")` no longer has an applicable plan to run (the example keeps the receiver cycling and needs to be interrupted).
+
+With `maspy-ml==2026.5.13` the plan was added again instead of removed, `_plan_index` remained unchanged, and `Receiver` still executed the `hello` goal.
 
 ## Requirements
 
